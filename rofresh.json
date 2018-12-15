@@ -1,0 +1,26 @@
+{
+    "name": "RofreshPlugin",
+    "allowAnyPlaceId": true,
+    "partitions": {
+        "replicatedstorage": {
+            "path": "out/replicated-storage",
+            "target": "ReplicatedStorage"
+        },
+        "setupclient": {
+            "path": "out/setup/setupclient",
+            "target": "StarterPlayer.StarterPlayerScripts.>>"
+        },
+        "setupserver": {
+            "path": "out/setup/setupserver",
+            "target": "ServerScriptService.>>"
+        },
+        "include": {
+            "path": "include",
+            "target": "ReplicatedStorage.RobloxTS.Include"
+        },
+        "modules": {
+            "path": "modules",
+            "target": "ReplicatedStorage.RobloxTS.Modules"
+        }
+    }
+}

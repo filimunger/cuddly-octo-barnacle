@@ -1,0 +1,18 @@
+{
+    "types": ["rbx-types"],
+    "compilerOptions": {
+        "outDir": "out",
+        "rootDir": "src",
+        "module": "commonjs",
+        "strict": true,
+        "noLib": true,
+        "downlevelIteration": true,
+        "declaration": false,
+        "target": "es6",
+        "typeRoots": ["rbx-types"],
+        "strictPropertyInitialization": false
+    },
+    "typeAcquisition": {
+        "enable": true
+    }
+}
