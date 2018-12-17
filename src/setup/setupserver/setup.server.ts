@@ -17,20 +17,26 @@ if (Workspace.FindFirstChild('Bin')) {
     Workspace.Bin.Destroy()
 }
 
+let src: any
+src = (v: Instance) => {
+    if (v.IsA('Folder')) {
+        v.GetChildren().forEach(src)
+    }
+    if (v.IsA('ModuleScript')) {
+        if (v.Name.find('_server')) {
+            warn('require :: ', v.Name)
+            require(v as any)
+        }
+    }
+}
+
 warn('Loading Game')
 let extensions = ReplicatedStorage.ext
 BuildOrder.forEach(name => {
     let directory = extensions.FindFirstChild(name)
     if (directory) {
-        warn('Loading directory |', directory.Name)
-        directory.GetChildren().forEach(function(v) {
-            if (v instanceof ModuleScript) {
-                if (v.Name.find('_server')) {
-                    warn('req :: ', v.Name)
-                    require(v as any)
-                }
-            }
-        })
+        warn('Loading server directory |', directory.Name)
+        src(directory)
     } else {
         warn('Failed to load directory | ', name)
     }

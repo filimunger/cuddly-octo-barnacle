@@ -1,8 +1,8 @@
 import { Workspace } from 'rbx-services'
 
-import { CallRemote } from '../manager-remote/manager-remote'
-import { BindInputs } from '../manager-userinput/userinput-module'
-import { C } from '../manager-userinterface/userinterface-module'
+import { CallRemote } from '../../manager-remote/manager-remote'
+import { BindInputs } from '../../manager-userinput/userinput-module'
+import { C } from '../../manager-userinterface/userinterface-module'
 
 let camera = Workspace.CurrentCamera
 camera.CameraType = Enum.CameraType.Scriptable

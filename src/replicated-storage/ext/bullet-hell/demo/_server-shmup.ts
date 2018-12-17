@@ -1,14 +1,13 @@
 import { Players, Workspace, ReplicatedFirst, ReplicatedStorage } from 'rbx-services'
 
-import { EngageRemoteObject } from '../manager-remote/manager-remote'
+import { EngageRemoteObject } from '../../manager-remote/manager-remote'
 import { MapHeightRadius, MapWidthRadius } from './module'
-import { GetModelCFrame } from '../msc/helper-functions'
+import { GetModelCFrame } from '../../msc/helper-functions'
 import { SetPartCollisionGroup } from './collision-groups'
-import { CreateEnemy, CreateFriendly, GetFriendlyCharacter } from './character-manager'
+import { GetFriendlyForPlayer } from './character-manager'
+import { CreateEnemy, CreateFriendly } from './character-creation'
 
 export = true
-
-Players.CharacterAutoLoads = false
 
 let friendlyCharacters = new Model(Workspace)
 friendlyCharacters.Name = 'FriendlyCharacters'
@@ -52,12 +51,12 @@ Players.PlayerAdded.Connect(player => {
 let ManagedRemotes = {
     CharacterSteer: (player: Player | undefined, x: number, y: number, steady?: boolean) => {
         if (player) {
-            GetFriendlyCharacter(player).Steer(x, y, steady)
+            GetFriendlyForPlayer(player).Steer(x, y, steady)
         }
     },
     CharacterFire: (player: Player | undefined, bool: boolean) => {
         if (player) {
-            GetFriendlyCharacter(player).Fire(bool)
+            GetFriendlyForPlayer(player).Fire(bool)
         }
     },
 }

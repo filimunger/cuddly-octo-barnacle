@@ -290,3 +290,14 @@ export let WeldModel = (model: Model, weldTo?: BasePart) => {
         }
     }
 }
+export let RandomIndexFromDictionary = <T extends { [index: string]: any }>(dictionary: T): keyof T => {
+    let indexes = []
+    for (let index in dictionary) {
+        indexes.push(index)
+    }
+    return indexes[math.random(0, indexes.length - 1)]
+}
+
+export let RandomFromDictionary = <T extends any>(dictionary: { [index: string]: T }): T => {
+    return dictionary[RandomIndexFromDictionary(dictionary)]
+}

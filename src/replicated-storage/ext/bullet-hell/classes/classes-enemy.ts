@@ -1,12 +1,12 @@
 import { SetPartCollisionGroup } from '../demo/collision-groups'
 import { MapWidthRadius, MapHeightRadius } from '../demo/module'
-import { Character } from './classes'
+import { Character, T_Character } from './classes'
 import { T_Deck, T_DeckName, Classes_Deck } from './classes-deck'
 import { Workspace } from 'rbx-services'
-import { WeldModel } from '../msc/helper-functions'
+import { WeldModel } from '../../msc/helper-functions'
 
-let createDeck = (name: T_DeckName) => {
-    return new Classes_Deck[name]()
+let createDeck = (name: T_DeckName, character: T_Character) => {
+    return new Classes_Deck[name](character)
 }
 
 class Character_Enemy extends Character {
@@ -18,12 +18,7 @@ class Character_Enemy extends Character {
         }
     }
     Play() {
-        print('me', this)
-        if (this) {
-            this.Deck.Play()
-        } else {
-            print('lol')
-        }
+        this.Deck.Play()
     }
     constructor(name: string) {
         super(name)
@@ -34,7 +29,8 @@ class Character_Enemy extends Character {
             }
         }
         WeldModel(this.Model)
-        this.Model.SetPrimaryPartCFrame(new CFrame(new Vector3(math.random(-MapWidthRadius, MapWidthRadius), 0, -MapHeightRadius + 50)))
+        this.Model.SetPrimaryPartCFrame(new CFrame(new Vector3(math.random(-MapWidthRadius, MapWidthRadius), 0, -MapHeightRadius - 10)))
+        this.SetVelocity(new Vector3(0, 0, 10))
     }
 }
 export type T_EnemyCharacter = Character_Enemy
@@ -42,9 +38,9 @@ export type T_EnemyName = keyof typeof Classes_Enemy
 
 export namespace Classes_Enemy {
     export class Noid extends Character_Enemy {
-        Deck = createDeck('Noid')
+        Deck = createDeck('Noid', this)
     }
     export class ProceduralBoss extends Character_Enemy {
-        Deck = createDeck('RandomizedBossDeck')
+        Deck = createDeck('RandomizedBossDeck', this)
     }
 }

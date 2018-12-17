@@ -2,10 +2,10 @@ import { Character, T_Character } from './classes'
 import { T_Blaster, Classes_Blaster, T_BlasterName } from './classes-blaster'
 import { SetPartCollisionGroup } from '../demo/collision-groups'
 import { OriginFrame } from '../demo/module'
-import { WeldModel, CreateNewEffect, VariableValue } from '../msc/helper-functions'
 import { Workspace } from 'rbx-services'
+import { VariableValue, CreateNewEffect, WeldModel } from '../../msc/helper-functions'
 
-let CreateBlaster = (blasterName: T_BlasterName, character: T_Character) => {
+let createBlaster = (blasterName: T_BlasterName, character: T_Character) => {
     let cls = new Classes_Blaster[blasterName](character)
     return cls
 }
@@ -57,8 +57,7 @@ class Character_Friendly extends Character {
         this.UnitX += x
         this.UnitY += y
         this.BodyGyro.CFrame = OriginFrame.mul(CFrame.Angles(0, 0, -math.rad(45 * this.UnitX * (this.Steady ? 0.5 : 1))))
-        this.BodyVelocity.Velocity = new Vector3(this.CurrentUnitVelocity * this.UnitX, 0, this.CurrentUnitVelocity * this.UnitY * -1)
-
+        this.SetVelocity(new Vector3(this.CurrentUnitVelocity * this.UnitX, 0, this.CurrentUnitVelocity * this.UnitY * -1))
         let blazeBool = this.UnitY !== -1
         for (let effect of this.Effects.Blazer) {
             effect.Enabled = blazeBool
@@ -71,9 +70,14 @@ class Character_Friendly extends Character {
     UpdateInternal(id: string) {
         this.InternalData[id].Value = (this as any)[id]
     }
+    Spawn() {
+        this.Steer(0, 0, false)
+        this.Model.SetPrimaryPartCFrame(new CFrame(new Vector3()))
+    }
     Die() {
         this.Lives--
         this.UpdateInternal('Lives')
+        this.Spawn()
         print('ded')
     }
     constructor(name: string, player: Player) {
@@ -115,7 +119,7 @@ class Character_Friendly extends Character {
             }
         }
         WeldModel(this.Model)
-        this.Steer(0, 0, false)
+        this.Spawn()
     }
 }
 export type T_FriendlyCharacter = Character_Friendly
@@ -124,7 +128,7 @@ export type T_FriendlyName = keyof typeof Classes_Friendly
 export namespace Classes_Friendly {
     export class Plane extends Character_Friendly {
         Name = 'Plane'
-        Blasters = [CreateBlaster('SimpleBlaster', this)]
+        Blasters = [createBlaster('SimpleBlaster', this)]
         HitBoxRadius = 5
     }
     export class Bomber extends Character_Friendly {

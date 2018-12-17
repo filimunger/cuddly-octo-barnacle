@@ -1,1 +1,1 @@
-export let BuildOrder = ['manager-remote', 'manager-userinput', 'manager-userinterface', 'manager-permissions', 'msc', 'demo']
+export let BuildOrder = ['manager-remote', 'manager-userinput', 'manager-userinterface', 'manager-permissions', 'msc', 'bullet-hell']
