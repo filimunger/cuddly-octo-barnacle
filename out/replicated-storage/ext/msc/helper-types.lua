@@ -1,6 +1,5 @@
 local TS = require(game:GetService("ReplicatedStorage").RobloxTS.Include.RuntimeLib);
-local _exports;
-print('hello');
-_exports = true;
-local vect = Vector3.new(1, 1, 1);
+local _exports = {};
+local a;
+_exports.a = a;
 return _exports;

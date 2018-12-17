@@ -710,7 +710,7 @@ export namespace UserInterfaceTypes {
     }
 }
 
-export function C<T extends keyof typeof UserInterfaceTypes, C extends InstanceType<typeof UserInterfaceTypes[T]>, K extends keyof C>(className: T, parent?: GuiObject | UserInterfaceTypes.Primitive | UserInterfaceTypes.Container, properties?: { [index in K]: C[K] }, ...args: any[]): C {
+export function C<T extends keyof typeof UserInterfaceTypes, C extends InstanceType<typeof UserInterfaceTypes[T]>, K extends keyof C>(className: T, parent?: GuiObject | Folder | UserInterfaceTypes.Primitive | UserInterfaceTypes.Container, properties?: { [index in K]: C[K] }, ...args: any[]): C {
     let newClass = new (UserInterfaceTypes as any)[className](...args) as any
     if (parent) {
         let nParent = undefined
@@ -719,6 +719,8 @@ export function C<T extends keyof typeof UserInterfaceTypes, C extends InstanceT
         } else {
             if ((parent as any)['Frame']) {
                 nParent = (parent as any)['Frame']
+            } else if ((parent as any)['MainFrame']) {
+                nParent = (parent as any)['MainFrame']
             } else if ((parent as any)['Folder']) {
                 nParent = (parent as any)['Folder']
             }

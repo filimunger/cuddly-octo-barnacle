@@ -1,7 +1,7 @@
 local TS = require(game:GetService("ReplicatedStorage").RobloxTS.Include.RuntimeLib);
 local _exports = {};
 local BindInputs = TS.import(script.Parent.Parent, "manager-userinput", "userinput-module").BindInputs;
-local _0 = TS.import(script.Parent.Parent, "manager-userinterface", "userinterface-module");
+local _0 = TS.import(script.Parent, "userinterface-module");
 local C, T_Panel, T_TypeButton = _0.C, _0.T_Panel, _0.T_TypeButton;
 local _1 = require(TS.getModule("rbx-services", script.Parent).out);
 local TweenService, Workspace, Players, StarterGui = _1.TweenService, _1.Workspace, _1.Players, _1.StarterGui;
@@ -139,8 +139,6 @@ local distancePart = Instance.new("Part", Workspace);
 distancePart.Anchored = true;
 distancePart.CFrame = CFrame.new(Vector3.new(0, -50, 0));
 distancePart.Transparency = 1;
-local box = CreateNewEffect('Box', Workspace);
-box:SetPrimaryPartCFrame(CFrame.new(distancePart.Position));
 BindInputs({ Enum.KeyCode.Y, function()
 	local bool = panel.Visible;
 	panel.Visible = not bool;

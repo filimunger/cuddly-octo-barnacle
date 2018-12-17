@@ -1,5 +1,6 @@
 import { ReplicatedStorage, RunService, Players } from 'rbx-services'
 import { T_ManagedRemotes } from './remote-hub'
+
 type T_ManagedRemotesIndex = keyof T_ManagedRemotes
 type T_ArgumentTypes<F extends Function> = F extends (...args: infer A) => any ? A : never
 type T_AnyRemote = RemoteEvent | RemoteFunction | BindableEvent | BindableFunction

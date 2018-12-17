@@ -1,5 +1,5 @@
 {
-    "name": "RofreshPlugin",
+    "name": "RofreshPlugin2",
     "allowAnyPlaceId": true,
     "partitions": {
         "replicatedstorage": {

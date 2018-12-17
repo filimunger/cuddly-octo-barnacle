@@ -1123,6 +1123,8 @@ C = function(className, parent, properties, ...)
 		else
 			if (parent)['Frame'] then
 				nParent = (parent)['Frame'];
+			elseif (parent)['MainFrame'] then
+				nParent = (parent)['MainFrame'];
 			elseif (parent)['Folder'] then
 				nParent = (parent)['Folder'];
 			end;

@@ -1,6 +1,6 @@
 import { ReplicatedStorage } from 'rbx-services'
 import { BuildOrder } from '../../replicated-storage/build-order'
-wait(2)
+wait(0.5)
 warn('Loading Client Game')
 let extensions = ReplicatedStorage.ext
 BuildOrder.forEach(name => {

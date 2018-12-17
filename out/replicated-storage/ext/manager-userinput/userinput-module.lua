@@ -19,11 +19,14 @@ BindInputs = function(...)
 				end;
 			end;
 			if TS.typeof(t[1]) == 'string' then
-				local supposedKey = InputCodes[t[1]];
-				if input.KeyCode == supposedKey or input.UserInputType == supposedKey then
-					local fn = t[(bool and 1 or 2) + 1];
-					if fn then
-						fn();
+				local supposedKeys = InputCodes[t[1]];
+				for _, item in pairs(supposedKeys) do
+					if item == input.KeyCode or item == input.UserInputType then
+						local fn = t[(bool and 1 or 2) + 1];
+						if fn then
+							fn();
+						end;
+						break;
 					end;
 				end;
 			end;
@@ -56,7 +59,5 @@ BindInputs = function(...)
 	end;
 	return connection1, connection2;
 end;
-BindInputs({ 'Ability1', function()
-end });
 _exports.BindInputs = BindInputs;
 return _exports;

@@ -1,5 +1,5 @@
 import { BindInputs } from '../manager-userinput/userinput-module'
-import { C, T_Panel, T_TypeButton } from '../manager-userinterface/userinterface-module'
+import { C, T_Panel, T_TypeButton } from './userinterface-module'
 import { TweenService, Workspace, Players, StarterGui } from 'rbx-services'
 import { CreateNewEffect } from '../msc/helper-functions'
 
@@ -91,8 +91,6 @@ let distancePart = new Part(Workspace)
 distancePart.Anchored = true
 distancePart.CFrame = new CFrame(new Vector3(0, -50, 0))
 distancePart.Transparency = 1
-let box = CreateNewEffect('Box', Workspace) as Model
-box.SetPrimaryPartCFrame(new CFrame(distancePart.Position))
 BindInputs([
     Enum.KeyCode.Y,
     function() {

@@ -1,7 +1,7 @@
 local TS = require(game:GetService("ReplicatedStorage").RobloxTS.Include.RuntimeLib);
 local ReplicatedStorage = require(TS.getModule("rbx-services", script.Parent).out).ReplicatedStorage;
 local BuildOrder = TS.import("ReplicatedStorage", "build-order").BuildOrder;
-wait(2);
+wait(0.5);
 warn('Loading Client Game');
 local extensions = ReplicatedStorage.ext;
 TS.array_forEach(BuildOrder, function(name)

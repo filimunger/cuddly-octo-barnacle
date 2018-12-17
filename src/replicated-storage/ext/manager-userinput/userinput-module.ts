@@ -15,11 +15,14 @@ export function BindInputs(...a: T_InputCache[]): [RBXScriptConnection | undefin
                 }
             }
             if (typeof t[0] === 'string') {
-                let supposedKey = InputCodes[t[0]]
-                if (input.KeyCode === supposedKey || input.UserInputType === supposedKey) {
-                    let fn = t[bool ? 1 : 2]
-                    if (fn) {
-                        fn()
+                let supposedKeys = InputCodes[t[0]]
+                for (let item of supposedKeys) {
+                    if (item === input.KeyCode || item === input.UserInputType) {
+                        let fn = t[bool ? 1 : 2]
+                        if (fn) {
+                            fn()
+                        }
+                        break
                     }
                 }
             }
@@ -53,5 +56,3 @@ export function BindInputs(...a: T_InputCache[]): [RBXScriptConnection | undefin
     }
     return [connection1, connection2]
 }
-
-BindInputs(['Ability1', () => {}])

@@ -20,10 +20,10 @@ export class VisualSettings {
     TypeBoxColor: Color3
     LabelTextColor = Color3.fromRGB(0, 0, 0)
     IconImage = 'rbxgameasset://hue_gradient'
-    TexturePanelImage = 'rbxgameasset://Images/bevel-square-extra-tight'
-    TextureButtonImage = 'rbxgameasset://Images/bevel-square-extra-tight'
-    TypePanelImage = 'rbxgameasset://Images/bevel-square-extra-tight'
-    TypeButtonImage = 'rbxgameasset://Images/bevel-square-extra-tight'
+    TexturePanelImage = 'rbxassetid://2579500533'
+    TextureButtonImage = 'rbxassetid://2579500533'
+    TypePanelImage = 'rbxassetid://2579500533'
+    TypeButtonImage = 'rbxassetid://2579500533'
     ImageSize = 256
     NineSlice = 16
     TextTipBackgroundColor = Color3.fromRGB(0, 0, 0)

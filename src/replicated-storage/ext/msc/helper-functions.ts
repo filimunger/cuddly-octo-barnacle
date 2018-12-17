@@ -64,7 +64,6 @@ export let CreateCompoundedValue = (variable: number | string, parent?: Instance
     return baseValue
 }
 
-// Possible character starters: + * >
 export let ModifyCompoundedValue = (value: Instance, modifyString: string) => {
     let firstCharacter = modifyString.sub(1, 1)
     let factor = tonumber(modifyString.gsub(firstCharacter, ''))
@@ -253,4 +252,41 @@ export let SimpleVector = (vect: Vector3) => {
 }
 export let SimpleMagnitude = (vect0: Vector3, vect1: Vector3) => {
     return SimpleVector(vect0).sub(SimpleVector(vect1)).Magnitude
+}
+
+export let GetModelCFrame = (model: Model) => {
+    return new CFrame(((model as any) as { GetModelCFrame(): CFrame }).GetModelCFrame().p)
+}
+
+export let AddPrimaryPart = (model: Model) => {
+    let primaryPart = new Part()
+    primaryPart.Name = 'PrimaryPart'
+    primaryPart.Anchored = true
+    primaryPart.Transparency = 1
+    primaryPart.Size = new Vector3()
+    primaryPart.CFrame = GetModelCFrame(model)
+    primaryPart.Parent = model
+    model.PrimaryPart = primaryPart
+    return primaryPart
+}
+
+export let WeldModel = (model: Model, weldTo?: BasePart) => {
+    if (!weldTo) {
+        if (model.PrimaryPart) {
+            weldTo = model.PrimaryPart
+        } else {
+            warn('No primary for weld')
+            return
+        }
+    }
+    for (let instance of model.GetChildren()) {
+        if (instance.IsA('BasePart')) {
+            instance.Anchored = false
+            if (instance !== weldTo) {
+                let weld = new WeldConstraint(weldTo)
+                weld.Part0 = weldTo
+                weld.Part1 = instance
+            }
+        }
+    }
 }
