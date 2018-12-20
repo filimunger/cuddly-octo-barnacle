@@ -1,7 +1,7 @@
 import { SimpleVector, CreateNewEffect } from '../../msc/helper-functions'
 import { Workspace, TweenService } from 'rbx-services'
-import { SetPartCollisionGroup } from '../demo/collision-groups'
-import { GetFriendlyFromPart } from '../demo/character-manager'
+import { SetPartCollisionGroup } from '../main/collision-groups'
+import { GetFriendlyFromPart } from '../main/character-manager'
 
 let bulletSave = CreateNewEffect('EnemyBullet') as Part
 

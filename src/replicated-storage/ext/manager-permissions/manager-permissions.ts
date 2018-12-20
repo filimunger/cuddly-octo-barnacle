@@ -1,12 +1,12 @@
 import { Players } from 'rbx-services'
 
-export let RankObject = { Player: 0, Editor: 1, Host: 2 }
+export const RankObject = { Player: 0, Editor: 1, Host: 2 }
 type T_RankObject = typeof RankObject
 export type T_Rank = keyof T_RankObject
 export type T_RankId = T_RankObject[T_Rank]
 
-export let ManageGameRank: T_Rank = 'Editor'
-export let EditRanksRank: T_Rank = 'Player'
+export const ManageGameRank: T_Rank = 'Editor'
+export const EditRanksRank: T_Rank = 'Player'
 
 export function GetRankId(rank: T_Rank): T_RankId {
     return RankObject[rank]

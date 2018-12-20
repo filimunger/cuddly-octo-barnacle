@@ -3,7 +3,7 @@ import { EngageRemoteObject } from '../manager-remote/manager-remote'
 let screenGui = new ScreenGui(StarterGui)
 screenGui.ResetOnSpawn = false
 
-export let UserInterfaceRemotes = {
+export const UserInterfaceRemotes = {
     ChangeValue: (player: Player | undefined, value: any, newVariable: any) => {
         value.Value = newVariable
     },

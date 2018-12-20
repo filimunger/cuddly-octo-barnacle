@@ -1,6 +1,6 @@
 import { Workspace } from 'rbx-services'
 
-import { OriginFrame } from '../demo/module'
+import { OriginFrame } from '../main/module'
 import { AddPrimaryPart, CreateNewEffect, WeldModel } from '../../msc/helper-functions'
 
 export class Character {

@@ -1,9 +1,9 @@
 local TS = require(game:GetService("ReplicatedStorage").RobloxTS.Include.RuntimeLib);
 local _exports;
 local Workspace = require(TS.getModule("rbx-services", script.Parent).out).Workspace;
-local CallRemote = TS.import(script.Parent.Parent, "manager-remote", "manager-remote").CallRemote;
-local BindInputs = TS.import(script.Parent.Parent, "manager-userinput", "userinput-module").BindInputs;
-local C = TS.import(script.Parent.Parent, "manager-userinterface", "userinterface-module").C;
+local CallRemote = TS.import(script.Parent.Parent.Parent, "manager-remote", "manager-remote").CallRemote;
+local BindInputs = TS.import(script.Parent.Parent.Parent, "manager-userinput", "userinput-module").BindInputs;
+local C = TS.import(script.Parent.Parent.Parent, "manager-userinterface", "userinterface-module").C;
 local camera = Workspace.CurrentCamera;
 camera.CameraType = Enum.CameraType.Scriptable;
 camera.FieldOfView = 20;

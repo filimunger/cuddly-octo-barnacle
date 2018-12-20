@@ -28,13 +28,13 @@ ConvertVariable = (variable: any, parent?: Instance) => {
     return v
 }
 
-export let VariableValue = (variable: any, parent?: Instance, name?: string): any => {
+export const VariableValue = (variable: any, parent?: Instance, name?: string): any => {
     let v = ConvertVariable(variable, parent)
     v.Name = name ? name : 'VariableValue'
     return v
 }
 
-export let CreateCompoundedValue = (variable: number | string, parent?: Instance, name?: string) => {
+export const CreateCompoundedValue = (variable: number | string, parent?: Instance, name?: string) => {
     let baseValue = VariableValue(variable, parent, name) as NumberValue | StringValue
     let reAssign = () => {
         let factor
@@ -64,7 +64,7 @@ export let CreateCompoundedValue = (variable: number | string, parent?: Instance
     return baseValue
 }
 
-export let ModifyCompoundedValue = (value: Instance, modifyString: string) => {
+export const ModifyCompoundedValue = (value: Instance, modifyString: string) => {
     let firstCharacter = modifyString.sub(1, 1)
     let factor = tonumber(modifyString.gsub(firstCharacter, ''))
     let myValue = new NumberValue(value)
@@ -73,11 +73,11 @@ export let ModifyCompoundedValue = (value: Instance, modifyString: string) => {
     return myValue
 }
 
-export let CustomCheckTypeOf = (element: any, string: 'Userdata' | 'EnumItem') => {
+export const CustomCheckTypeOf = (element: any, string: 'Userdata' | 'EnumItem') => {
     return typeof element === (string as any)
 }
 
-export let ScaleModel = (model: Model, scaling: number) => {
+export const ScaleModel = (model: Model, scaling: number) => {
     let scaleCFrame = (frame: CFrame) => {
         let [a, b, c, c0, c1, c2, c3, c4, c5, c6, c7, c8] = frame.components()
         return new CFrame(frame.p.mul(scaling)).mul(new CFrame(0, 0, 0, c0, c1, c2, c3, c4, c5, c6, c7, c8))
@@ -104,7 +104,7 @@ export let ScaleModel = (model: Model, scaling: number) => {
     }
 }
 
-export let DeepCopy = (object: any) => {
+export const DeepCopy = (object: any) => {
     let clone = {}
     let search: any
     search = (directory: any, pair: any) => {
@@ -124,7 +124,7 @@ export let DeepCopy = (object: any) => {
     return clone
 }
 
-export let ObjectArrayLength = (object: any) => {
+export const ObjectArrayLength = (object: any) => {
     let count = 0
     for (let index in object) {
         count++
@@ -132,7 +132,7 @@ export let ObjectArrayLength = (object: any) => {
     return count
 }
 
-export let PackData = (data: { [index: string]: any }) => {
+export const PackData = (data: { [index: string]: any }) => {
     let search: any
     search = (directory: any) => {
         for (let index in directory) {
@@ -150,7 +150,7 @@ export let PackData = (data: { [index: string]: any }) => {
     return data
 }
 
-export let UnpackData = (data: { [index: string]: any }) => {
+export const UnpackData = (data: { [index: string]: any }) => {
     let search: any
     search = (directory: any) => {
         for (let index in directory) {
@@ -170,7 +170,7 @@ export let UnpackData = (data: { [index: string]: any }) => {
     search(data)
 }
 
-export let BringElementToFront = (array: any[], element: any) => {
+export const BringElementToFront = (array: any[], element: any) => {
     let index = array.indexOf(element)
     if (index > -1) {
         let old = array[0]
@@ -180,7 +180,7 @@ export let BringElementToFront = (array: any[], element: any) => {
     return array
 }
 
-export let ConvertObjectToArray = (object: {}) => {
+export const ConvertObjectToArray = (object: {}) => {
     let array = []
     for (let index in object) {
         array.push((object as any)[index])
@@ -188,7 +188,7 @@ export let ConvertObjectToArray = (object: {}) => {
     return array
 }
 
-export let MaterialList = (str?: string) => {
+export const MaterialList = (str?: string) => {
     let t = ['Plastic', 'Wood', 'Slate', 'Concrete', 'CorrodedMetal', 'DiamondPlate', 'Foil', 'Grass', 'Ice', 'Marble', 'Granite', 'Brick', 'Pebble', 'Sand', 'Fabric', 'SmoothPlastic', 'Metal', 'WoodPlanks', 'Cobblestone']
     if (str) {
         BringElementToFront(t, str)
@@ -196,7 +196,7 @@ export let MaterialList = (str?: string) => {
     return t
 }
 
-export let EnumString = (e: any) => {
+export const EnumString = (e: any) => {
     let str = tostring(e)
     for (let i = str.length; i > 0; i--) {
         if (str.sub(i, i) === '.') {
@@ -207,7 +207,7 @@ export let EnumString = (e: any) => {
     return ''
 }
 
-export let Round = (number: number, value?: number) => {
+export const Round = (number: number, value?: number) => {
     if (!value || value === 1) {
         return math.floor(number + 0.5)
     } else {
@@ -215,12 +215,11 @@ export let Round = (number: number, value?: number) => {
     }
 }
 
-export let AlignVectorToGrid = (vector: Vector3, value?: number, ignoreY?: boolean) => {
+export const AlignVectorToGrid = (vector: Vector3, value?: number, ignoreY?: boolean) => {
     return new Vector3(Round(vector.X, value), ignoreY ? vector.Y : Round(vector.Y, value), Round(vector.Z, value))
 }
 
-export let RecursiveSearchInstance: any
-RecursiveSearchInstance = (search: Instance, name: string) => {
+export const RecursiveSearchInstance = (search: Instance, name: string): Instance | undefined => {
     if (search.Name === name) {
         return search
     }
@@ -231,7 +230,7 @@ RecursiveSearchInstance = (search: Instance, name: string) => {
         }
     }
 }
-export let CreateNewEffect = (effectName: string, parent?: Instance) => {
+export const CreateNewEffect = (effectName: string, parent?: Instance) => {
     let effects = ReplicatedStorage.WaitForChild('Effects')
     let search = RecursiveSearchInstance(effects, effectName)
     if (search) {
@@ -241,24 +240,24 @@ export let CreateNewEffect = (effectName: string, parent?: Instance) => {
     }
 }
 
-export let CreateClass = <T extends new () => any, C extends InstanceType<T>>(cs: T, properties?: { [index in keyof C]?: C[keyof C] }): C => {
+export const CreateClass = <T extends new () => any, C extends InstanceType<T>>(cs: T, properties?: { [index in keyof C]?: C[keyof C] }): C => {
     let newClass = new cs()
     if (properties) for (let index in properties) newClass[index] = properties[index]
     return newClass
 }
 
-export let SimpleVector = (vect: Vector3) => {
+export const SimpleVector = (vect: Vector3) => {
     return new Vector3(vect.X, 0, vect.Z)
 }
-export let SimpleMagnitude = (vect0: Vector3, vect1: Vector3) => {
+export const SimpleMagnitude = (vect0: Vector3, vect1: Vector3) => {
     return SimpleVector(vect0).sub(SimpleVector(vect1)).Magnitude
 }
 
-export let GetModelCFrame = (model: Model) => {
+export const GetModelCFrame = (model: Model) => {
     return new CFrame(((model as any) as { GetModelCFrame(): CFrame }).GetModelCFrame().p)
 }
 
-export let AddPrimaryPart = (model: Model) => {
+export const AddPrimaryPart = (model: Model) => {
     let primaryPart = new Part()
     primaryPart.Name = 'PrimaryPart'
     primaryPart.Anchored = true
@@ -270,7 +269,7 @@ export let AddPrimaryPart = (model: Model) => {
     return primaryPart
 }
 
-export let WeldModel = (model: Model, weldTo?: BasePart) => {
+export const WeldModel = (model: Model, weldTo?: BasePart) => {
     if (!weldTo) {
         if (model.PrimaryPart) {
             weldTo = model.PrimaryPart
@@ -290,7 +289,7 @@ export let WeldModel = (model: Model, weldTo?: BasePart) => {
         }
     }
 }
-export let RandomIndexFromDictionary = <T extends { [index: string]: any }>(dictionary: T): keyof T => {
+export const RandomIndexFromDictionary = <T extends { [index: string]: any }>(dictionary: T): keyof T => {
     let indexes = []
     for (let index in dictionary) {
         indexes.push(index)
@@ -298,6 +297,6 @@ export let RandomIndexFromDictionary = <T extends { [index: string]: any }>(dict
     return indexes[math.random(0, indexes.length - 1)]
 }
 
-export let RandomFromDictionary = <T extends any>(dictionary: { [index: string]: T }): T => {
+export const RandomFromDictionary = <T extends any>(dictionary: { [index: string]: T }): T => {
     return dictionary[RandomIndexFromDictionary(dictionary)]
 }

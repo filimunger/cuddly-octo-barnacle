@@ -1,5 +1,5 @@
-import { SetPartCollisionGroup } from '../demo/collision-groups'
-import { MapWidthRadius, MapHeightRadius } from '../demo/module'
+import { SetPartCollisionGroup } from '../main/collision-groups'
+import { MapWidthRadius, MapHeightRadius } from '../main/module'
 import { Character, T_Character } from './classes'
 import { T_Deck, T_DeckName, Classes_Deck } from './classes-deck'
 import { Workspace } from 'rbx-services'

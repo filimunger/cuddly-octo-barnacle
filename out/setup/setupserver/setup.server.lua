@@ -17,20 +17,25 @@ end;
 if Workspace:FindFirstChild('Bin') then
 	Workspace.Bin:Destroy();
 end;
+local src;
+src = function(v)
+	if v:IsA('Folder') then
+		TS.array_forEach(v:GetChildren(), src);
+	end;
+	if v:IsA('ModuleScript') then
+		if string.find(v.Name, '_server') then
+			warn('require :: ', v.Name);
+			require(v);
+		end;
+	end;
+end;
 warn('Loading Game');
 local extensions = ReplicatedStorage.ext;
 TS.array_forEach(BuildOrder, function(name)
 	local directory = extensions:FindFirstChild(name);
 	if directory then
-		warn('Loading directory |', directory.Name);
-		TS.array_forEach(directory:GetChildren(), function(v)
-			if TS.isA(v, "ModuleScript") then
-				if string.find(v.Name, '_server') then
-					warn('req :: ', v.Name);
-					require(v);
-				end;
-			end;
-		end);
+		warn('Loading server directory |', directory.Name);
+		src(directory);
 	else
 		warn('Failed to load directory | ', name);
 	end;

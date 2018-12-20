@@ -1,1 +1,1 @@
-export let a = undefined
+export const a = undefined

@@ -10,7 +10,7 @@ export type T_TextureButton = UserInterfaceTypes.TextureButton
 export type T_TypeButton = UserInterfaceTypes.TypeButton
 export type T_Container = UserInterfaceTypes.Container
 
-export let GameVisualSettings = new VisualSettings()
+export const GameVisualSettings = new VisualSettings()
 let texttipContainer: any
 let propertyMenuArea: any
 type T_InterfaceComponent = (object: UserInterfaceTypes.Primitive | UserInterfaceTypes.Container, ...args: any[]) => (() => void) | undefined

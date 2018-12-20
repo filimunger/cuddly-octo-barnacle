@@ -3,6 +3,7 @@ local _exports = {};
 local Deck;
 local _0 = TS.import(script.Parent, "classes-card");
 local T_CardName, T_Card, Classes_Card = _0.T_CardName, _0.T_Card, _0.Classes_Card;
+local T_Character = TS.import(script.Parent, "classes").T_Character;
 local createCard = function(cardName, deck)
 	TS.array_push(deck.Cards, Classes_Card[cardName].new());
 end;
@@ -11,15 +12,16 @@ do
 	Deck.__index = {
 		Play = function(self)
 			for _, card in pairs(self.Cards) do
-				card.Play();
+				card.Play(self.Character.Model:GetPrimaryPartCFrame());
 			end;
 		end;
 	};
 	Deck.new = function(...)
 		return Deck.constructor(setmetatable({}, Deck), ...);
 	end;
-	Deck.constructor = function(self, ...)
+	Deck.constructor = function(self, character)
 		self.Cards = {};
+		self.Character = character;
 		return self;
 	end;
 end;
@@ -45,8 +47,8 @@ local Classes_Deck = {} do
 		Noid.new = function(...)
 			return Noid.constructor(setmetatable({}, Noid), ...);
 		end;
-		Noid.constructor = function(self)
-			Deck.constructor(self);
+		Noid.constructor = function(self, character)
+			Deck.constructor(self, character);
 			createCard('NoidCard', self);
 			return self;
 		end;

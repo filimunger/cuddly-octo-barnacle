@@ -47,11 +47,11 @@ let internalMenu = C('Panel', container, { Transparency: 0.5, TotalPadding: 15 }
 let menu = C('Panel', container, { Transparency: 0.9, TotalPadding: 10 })
 container = C('Container', menu, { VAlignment: 'Top', CellSize: new UDim2(1, 0, 0, 30), Padding: 5 })
 
-export let AddMenuButton = (str: string = 'Undefined'): T_TypeButton => {
+export const AddMenuButton = (str: string = 'Undefined'): T_TypeButton => {
     let typeButton = C('TypeButton', container, { Text: str })
     return typeButton
 }
-export let AddInternalMenuButton = (str: string = 'Undefined'): T_Panel => {
+export const AddInternalMenuButton = (str: string = 'Undefined'): T_Panel => {
     let menuButton = AddMenuButton(str)
     let panel = C('Panel', internalMenu, { Visible: false })
     let icon = C('Icon', menuButton, { Image: 'rbxgameasset://Images/directional-arrow', Name: 'InternalIcon', Visible: false, Size: new UDim2(0, 30, 0, 30), Position: new UDim2(0, 5, 0, 0), Color: Color3.fromRGB(0, 0, 0) })
@@ -75,7 +75,7 @@ export let AddInternalMenuButton = (str: string = 'Undefined'): T_Panel => {
     })
     return panel
 }
-export let AddVisifyingMenuButton = (str: string = 'Undefined', toAlter: Frame) => {
+export const AddVisifyingMenuButton = (str: string = 'Undefined', toAlter: Frame) => {
     let menuButton = AddMenuButton(str)
     let panel = C('Panel', menuButton, { Visible: false, Size: new UDim2(0, 30, 0, 30), Position: new UDim2(0, 15, 0, 0), TotalPadding: -15, Transparency: 1 })
     let icon = C('Icon', panel, { Image: 'rbxgameasset://Images/eye-open', Color: Color3.fromRGB(0, 0, 0) })

@@ -5,12 +5,12 @@ local _0 = TS.import(script.Parent, "classes");
 local Character, T_Character = _0.Character, _0.T_Character;
 local _1 = TS.import(script.Parent, "classes-blaster");
 local T_Blaster, Classes_Blaster, T_BlasterName = _1.T_Blaster, _1.Classes_Blaster, _1.T_BlasterName;
-local SetPartCollisionGroup = TS.import(script.Parent.Parent, "demo", "collision-groups").SetPartCollisionGroup;
-local OriginFrame = TS.import(script.Parent.Parent, "demo", "module").OriginFrame;
-local _2 = TS.import(script.Parent.Parent, "msc", "helper-functions");
-local WeldModel, CreateNewEffect, VariableValue = _2.WeldModel, _2.CreateNewEffect, _2.VariableValue;
+local SetPartCollisionGroup = TS.import(script.Parent.Parent, "main", "collision-groups").SetPartCollisionGroup;
+local OriginFrame = TS.import(script.Parent.Parent, "main", "module").OriginFrame;
 local Workspace = require(TS.getModule("rbx-services", script.Parent).out).Workspace;
-local CreateBlaster = function(blasterName, character)
+local _2 = TS.import(script.Parent.Parent.Parent, "msc", "helper-functions");
+local VariableValue, CreateNewEffect, WeldModel = _2.VariableValue, _2.CreateNewEffect, _2.WeldModel;
+local createBlaster = function(blasterName, character)
 	local cls = Classes_Blaster[blasterName].new(character);
 	return cls;
 end;
@@ -47,10 +47,10 @@ do
 					self.CurrentUnitVelocity = self.UnitVelocity;
 				end;
 			end;
-			local _3 = self; _3.UnitX = _3.UnitX + (x);
-			local _4 = self; _4.UnitY = _4.UnitY + (y);
+			self.UnitX = self.UnitX + x;
+			self.UnitY = self.UnitY + y;
 			self.BodyGyro.CFrame = (OriginFrame * CFrame.Angles(0, 0, -math.rad(45 * self.UnitX * ((self.Steady and 0.5 or 1)))));
-			self.BodyVelocity.Velocity = Vector3.new(self.CurrentUnitVelocity * self.UnitX, 0, self.CurrentUnitVelocity * self.UnitY * -1);
+			self:SetVelocity(Vector3.new(self.CurrentUnitVelocity * self.UnitX, 0, self.CurrentUnitVelocity * self.UnitY * -1));
 			local blazeBool = self.UnitY ~= -1;
 			for _, effect in pairs(self.Effects.Blazer) do
 				effect.Enabled = blazeBool;
@@ -63,9 +63,14 @@ do
 		UpdateInternal = function(self, id)
 			self.InternalData[id].Value = (self)[id];
 		end;
+		Spawn = function(self)
+			self:Steer(0, 0, false);
+			self.Model:SetPrimaryPartCFrame(CFrame.new(Vector3.new()));
+		end;
 		Die = function(self)
-			local _5 = self; _5.Lives = _5.Lives - 1;
+			local _3 = self; _3.Lives = _3.Lives - 1;
 			self:UpdateInternal('Lives');
+			self:Spawn();
 			print('ded');
 		end;
 	}, super);
@@ -123,12 +128,12 @@ do
 			end;
 		end;
 		WeldModel(self.Model);
-		self:Steer(0, 0, false);
+		self:Spawn();
 		return self;
 	end;
 end;
 local Classes_Friendly = {} do
-	local _5 = Classes_Friendly;
+	local _3 = Classes_Friendly;
 	local Plane, Bomber;
 	do
 		local super = Character_Friendly;
@@ -140,7 +145,7 @@ local Classes_Friendly = {} do
 		Plane.constructor = function(self, ...)
 			super.constructor(self, ...);
 			self.Name = 'Plane';
-			self.Blasters = { CreateBlaster('SimpleBlaster', self) };
+			self.Blasters = { createBlaster('SimpleBlaster', self) };
 			self.HitBoxRadius = 5;
 			return self;
 		end;
@@ -160,8 +165,8 @@ local Classes_Friendly = {} do
 			return self;
 		end;
 	end;
-	_5.Plane = Plane;
-	_5.Bomber = Bomber;
+	_3.Plane = Plane;
+	_3.Bomber = Bomber;
 end;
 _exports.Classes_Friendly = Classes_Friendly;
 return _exports;

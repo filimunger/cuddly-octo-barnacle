@@ -1,34 +1,30 @@
 local TS = require(game:GetService("ReplicatedStorage").RobloxTS.Include.RuntimeLib);
 local _exports = {};
 local Character_Enemy;
-local SetPartCollisionGroup = TS.import(script.Parent.Parent, "demo", "collision-groups").SetPartCollisionGroup;
-local _0 = TS.import(script.Parent.Parent, "demo", "module");
+local SetPartCollisionGroup = TS.import(script.Parent.Parent, "main", "collision-groups").SetPartCollisionGroup;
+local _0 = TS.import(script.Parent.Parent, "main", "module");
 local MapWidthRadius, MapHeightRadius = _0.MapWidthRadius, _0.MapHeightRadius;
-local Character = TS.import(script.Parent, "classes").Character;
-local _1 = TS.import(script.Parent, "classes-deck");
-local T_Deck, T_DeckName, Classes_Deck = _1.T_Deck, _1.T_DeckName, _1.Classes_Deck;
+local _1 = TS.import(script.Parent, "classes");
+local Character, T_Character = _1.Character, _1.T_Character;
+local _2 = TS.import(script.Parent, "classes-deck");
+local T_Deck, T_DeckName, Classes_Deck = _2.T_Deck, _2.T_DeckName, _2.Classes_Deck;
 local Workspace = require(TS.getModule("rbx-services", script.Parent).out).Workspace;
-local WeldModel = TS.import(script.Parent.Parent, "msc", "helper-functions").WeldModel;
-local createDeck = function(name)
-	return Classes_Deck[name].new();
+local WeldModel = TS.import(script.Parent.Parent.Parent, "msc", "helper-functions").WeldModel;
+local createDeck = function(name, character)
+	return Classes_Deck[name].new(character);
 end;
 do
 	local super = Character;
 	Character_Enemy = {};
 	Character_Enemy.__index = setmetatable({
 		TakeDamage = function(self, damage)
-			local _2 = self; _2.Health = _2.Health - (damage);
+			local _3 = self; _3.Health = _3.Health - (damage);
 			if self.Health <= 0 then
 				self.Model:Destroy();
 			end;
 		end;
 		Play = function(self)
-			print('me', self);
-			if self then
-				self.Deck:Play();
-			else
-				print('lol');
-			end;
+			self.Deck:Play();
 		end;
 	}, super);
 	Character_Enemy.new = function(...)
@@ -43,12 +39,13 @@ do
 			end;
 		end;
 		WeldModel(self.Model);
-		self.Model:SetPrimaryPartCFrame(CFrame.new(Vector3.new(math.random(-MapWidthRadius, MapWidthRadius), 0, -MapHeightRadius + 50)));
+		self.Model:SetPrimaryPartCFrame(CFrame.new(Vector3.new(math.random(-MapWidthRadius, MapWidthRadius), 0, -MapHeightRadius - 10)));
+		self:SetVelocity(Vector3.new(0, 0, 10));
 		return self;
 	end;
 end;
 local Classes_Enemy = {} do
-	local _2 = Classes_Enemy;
+	local _3 = Classes_Enemy;
 	local Noid, ProceduralBoss;
 	do
 		local super = Character_Enemy;
@@ -59,7 +56,7 @@ local Classes_Enemy = {} do
 		end;
 		Noid.constructor = function(self, ...)
 			super.constructor(self, ...);
-			self.Deck = createDeck('Noid');
+			self.Deck = createDeck('Noid', self);
 			return self;
 		end;
 	end;
@@ -72,12 +69,12 @@ local Classes_Enemy = {} do
 		end;
 		ProceduralBoss.constructor = function(self, ...)
 			super.constructor(self, ...);
-			self.Deck = createDeck('RandomizedBossDeck');
+			self.Deck = createDeck('RandomizedBossDeck', self);
 			return self;
 		end;
 	end;
-	_2.Noid = Noid;
-	_2.ProceduralBoss = ProceduralBoss;
+	_3.Noid = Noid;
+	_3.ProceduralBoss = ProceduralBoss;
 end;
 _exports.Classes_Enemy = Classes_Enemy;
 return _exports;

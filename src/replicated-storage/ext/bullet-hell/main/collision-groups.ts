@@ -10,7 +10,7 @@ type T_CollisionGroupName = keyof typeof collisionGroups
 for (let name in collisionGroups) {
     PhysicsService.CreateCollisionGroup(name)
 }
-export let SetPartCollisionGroup = (part: BasePart, name: T_CollisionGroupName) => {
+export const SetPartCollisionGroup = (part: BasePart, name: T_CollisionGroupName) => {
     PhysicsService.SetPartCollisionGroup(part, name)
 }
 let collisionGroupsSetCollidable = (name0: T_CollisionGroupName, name1: T_CollisionGroupName, bool: boolean) => {

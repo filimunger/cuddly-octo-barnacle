@@ -10,7 +10,8 @@
         "declaration": false,
         "target": "es6",
         "typeRoots": ["rbx-types"],
-        "strictPropertyInitialization": false
+        "strictPropertyInitialization": false,
+        "types": ["rbx-types"]
     },
     "typeAcquisition": {
         "enable": true

@@ -1,7 +1,7 @@
 import { CreateNewEffect, RandomFromDictionary, RandomIndexFromDictionary } from '../../msc/helper-functions'
-import { SetPartCollisionGroup } from '../demo/collision-groups'
+import { SetPartCollisionGroup } from '../main/collision-groups'
 import { Workspace, Debris } from 'rbx-services'
-import { GetEnemyFromPart } from '../demo/character-manager'
+import { GetEnemyFromPart } from '../main/character-manager'
 
 class Bullet {
     BulletHostName: keyof typeof bulletHosts = 'BasicHost'

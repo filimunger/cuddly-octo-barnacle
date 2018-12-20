@@ -2,15 +2,15 @@ local TS = require(game:GetService("ReplicatedStorage").RobloxTS.Include.Runtime
 local _exports;
 local _0 = require(TS.getModule("rbx-services", script.Parent).out);
 local Players, Workspace, ReplicatedFirst, ReplicatedStorage = _0.Players, _0.Workspace, _0.ReplicatedFirst, _0.ReplicatedStorage;
-local EngageRemoteObject = TS.import(script.Parent.Parent, "manager-remote", "manager-remote").EngageRemoteObject;
+local EngageRemoteObject = TS.import(script.Parent.Parent.Parent, "manager-remote", "manager-remote").EngageRemoteObject;
 local _1 = TS.import(script.Parent, "module");
 local MapHeightRadius, MapWidthRadius = _1.MapHeightRadius, _1.MapWidthRadius;
-local GetModelCFrame = TS.import(script.Parent.Parent, "msc", "helper-functions").GetModelCFrame;
+local GetModelCFrame = TS.import(script.Parent.Parent.Parent, "msc", "helper-functions").GetModelCFrame;
 local SetPartCollisionGroup = TS.import(script.Parent, "collision-groups").SetPartCollisionGroup;
-local _2 = TS.import(script.Parent, "character-manager");
-local CreateEnemy, CreateFriendly, GetFriendlyCharacter = _2.CreateEnemy, _2.CreateFriendly, _2.GetFriendlyCharacter;
+local GetFriendlyForPlayer = TS.import(script.Parent, "character-manager").GetFriendlyForPlayer;
+local _2 = TS.import(script.Parent, "character-creation");
+local CreateEnemy, CreateFriendly = _2.CreateEnemy, _2.CreateFriendly;
 _exports = true;
-Players.CharacterAutoLoads = false;
 local friendlyCharacters = Instance.new("Model", Workspace);
 friendlyCharacters.Name = 'FriendlyCharacters';
 local enemyCharacters = Instance.new("Model", Workspace);
@@ -46,12 +46,12 @@ end);
 local ManagedRemotes = {
 	CharacterSteer = function(player, x, y, steady)
 		if player then
-			GetFriendlyCharacter(player):Steer(x, y, steady);
+			GetFriendlyForPlayer(player).Steer(x, y, steady);
 		end;
 	end;
 	CharacterFire = function(player, bool)
 		if player then
-			GetFriendlyCharacter(player):Fire(bool);
+			GetFriendlyForPlayer(player).Fire(bool);
 		end;
 	end;
 };

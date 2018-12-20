@@ -1,7 +1,7 @@
 import { Character, T_Character } from './classes'
 import { T_Blaster, Classes_Blaster, T_BlasterName } from './classes-blaster'
-import { SetPartCollisionGroup } from '../demo/collision-groups'
-import { OriginFrame } from '../demo/module'
+import { SetPartCollisionGroup } from '../main/collision-groups'
+import { OriginFrame } from '../main/module'
 import { Workspace } from 'rbx-services'
 import { VariableValue, CreateNewEffect, WeldModel } from '../../msc/helper-functions'
 
@@ -54,8 +54,8 @@ class Character_Friendly extends Character {
                 this.CurrentUnitVelocity = this.UnitVelocity
             }
         }
-        this.UnitX += x
-        this.UnitY += y
+        this.UnitX = this.UnitX + x
+        this.UnitY = this.UnitY + y
         this.BodyGyro.CFrame = OriginFrame.mul(CFrame.Angles(0, 0, -math.rad(45 * this.UnitX * (this.Steady ? 0.5 : 1))))
         this.SetVelocity(new Vector3(this.CurrentUnitVelocity * this.UnitX, 0, this.CurrentUnitVelocity * this.UnitY * -1))
         let blazeBool = this.UnitY !== -1

@@ -1,7 +1,7 @@
 import { CollectionService } from 'rbx-services'
 
 export type T_Palette = { Color1: Color3; Color2: Color3; Color3: Color3; Color4: Color3; Color5: Color3 }
-export let AvailablePalettes = {
+export const AvailablePalettes = {
     SeaBottomBlue: { Color1: Color3.fromRGB(225, 225, 225), Color2: Color3.fromRGB(140, 146, 162), Color3: Color3.fromRGB(89, 103, 132), Color4: Color3.fromRGB(66, 83, 129), Color5: Color3.fromRGB(47, 47, 49) },
     SisterSunflower: { Color1: Color3.fromRGB(195, 251, 244), Color2: Color3.fromRGB(251, 195, 202), Color3: Color3.fromRGB(251, 244, 195), Color4: Color3.fromRGB(137, 196, 250), Color5: Color3.fromRGB(195, 202, 251) },
     DiscordColors: { Color1: Color3.fromRGB(255, 255, 255), Color2: Color3.fromRGB(114, 137, 218), Color3: Color3.fromRGB(153, 170, 181), Color4: Color3.fromRGB(44, 47, 51), Color5: Color3.fromRGB(35, 39, 42) },
@@ -10,7 +10,7 @@ export let AvailablePalettes = {
     Poison: { Color1: Color3.fromRGB(223, 243, 228), Color2: Color3.fromRGB(113, 128, 185), Color3: Color3.fromRGB(52, 35, 166), Color4: Color3.fromRGB(46, 23, 96), Color5: Color3.fromRGB(23, 23, 56) },
 }
 
-export let PaletteInterfaceRemarks = { Panel: 'PanelColor', TexturePanel: 'TexturePanelColor', TextureButtonDefaultColor: 'TextureButtonColor', TypePanel: 'TypePanelColor', TypeButton: 'TypeButtonColor', TypeBox: 'TypeBoxColor' }
+export const PaletteInterfaceRemarks = { Panel: 'PanelColor', TexturePanel: 'TexturePanelColor', TextureButtonDefaultColor: 'TextureButtonColor', TypePanel: 'TypePanelColor', TypeButton: 'TypeButtonColor', TypeBox: 'TypeBoxColor' }
 export class VisualSettings {
     PanelColor: Color3
     TexturePanelColor: Color3

@@ -1,8 +1,8 @@
-import { Enemies, Friendlies } from './friendly-enemy-storage'
+import { Friendlies, Enemies } from './class-storage'
 
 // Note: these helper functions return as any, and fixing it would cause infinite recursions
 
-export let GetEnemyFromPart = (part: Instance) => {
+export const GetEnemyFromPart = (part: Instance) => {
     let parent = part.Parent
     for (let character of Enemies) {
         if (character.Model === parent) {
@@ -11,7 +11,7 @@ export let GetEnemyFromPart = (part: Instance) => {
     }
 }
 
-export let GetFriendlyFromPart = (part: Instance) => {
+export const GetFriendlyFromPart = (part: Instance) => {
     let parent = part.Parent
     for (let character of Friendlies) {
         if (character.Model === parent) {
@@ -20,7 +20,7 @@ export let GetFriendlyFromPart = (part: Instance) => {
     }
 }
 
-export let GetFriendlyForPlayer = (player: Player) => {
+export const GetFriendlyForPlayer = (player: Player) => {
     for (let character of Friendlies) {
         if (character.Player === player) {
             return character

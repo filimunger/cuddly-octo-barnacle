@@ -212,8 +212,7 @@ end;
 local AlignVectorToGrid = function(vector, value, ignoreY)
 	return Vector3.new(Round(vector.X, value), (ignoreY and vector.Y or Round(vector.Y, value)), Round(vector.Z, value));
 end;
-local RecursiveSearchInstance;
-RecursiveSearchInstance = function(search, name)
+local RecursiveSearchInstance = function(search, name)
 	if search.Name == name then
 		return search;
 	end;
@@ -282,6 +281,16 @@ local WeldModel = function(model, weldTo)
 		end;
 	end;
 end;
+local RandomIndexFromDictionary = function(dictionary)
+	local indexes = {};
+	for index in pairs(dictionary) do
+		TS.array_push(indexes, index);
+	end;
+	return indexes[math.random(0, #indexes - 1) + 1];
+end;
+local RandomFromDictionary = function(dictionary)
+	return dictionary[RandomIndexFromDictionary(dictionary)];
+end;
 _exports.VariableValue = VariableValue;
 _exports.CreateCompoundedValue = CreateCompoundedValue;
 _exports.ModifyCompoundedValue = ModifyCompoundedValue;
@@ -305,4 +314,6 @@ _exports.SimpleMagnitude = SimpleMagnitude;
 _exports.GetModelCFrame = GetModelCFrame;
 _exports.AddPrimaryPart = AddPrimaryPart;
 _exports.WeldModel = WeldModel;
+_exports.RandomIndexFromDictionary = RandomIndexFromDictionary;
+_exports.RandomFromDictionary = RandomFromDictionary;
 return _exports;
